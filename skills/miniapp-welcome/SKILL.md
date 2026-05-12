@@ -1,6 +1,6 @@
 ---
 name: miniapp-welcome
-description: "Use this when user wants to build a Telegram Mini App from scratch. Runs a full guided wizard: brief → design approval → bot logic approval → code → deploy → handoff. Beginner-friendly, step-by-step."
+description: "Use this when user wants to build a Telegram Mini App / мини-апп / miniapp from scratch. Triggered by phrases like: собрать мини-апп, сделать мини-апп, создать мини-апп, telegram mini app, хочу мини-апп. Runs a full guided wizard: brief → design approval → bot logic approval → code → deploy → handoff."
 ---
 
 # Telegram Mini App — сборка с нуля, пошаговый мастер

@@ -1,6 +1,6 @@
 ---
 name: deploy-vps
-description: "Use this to deploy a Telegram Mini App project to a VPS server. Handles Ubuntu setup, Node.js, PM2, nginx, SSL, DNS configuration, and Russian server proxy setup."
+description: "Use this to deploy / задеплоить / выгрузить на сервер a Telegram Mini App / мини-апп project to a VPS server. Triggered by: задеплой, деплой, залить на сервер, настроить сервер, выгрузить проект. Handles Ubuntu, Node.js, PM2, nginx, SSL, DNS, proxy."
 ---
 
 # Деплой Telegram Mini App на VPS

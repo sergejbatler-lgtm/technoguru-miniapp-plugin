@@ -1,6 +1,6 @@
 ---
 name: miniapp-events
-description: "Use this to add or improve an events calendar section in an existing Telegram Mini App. Handles event cards, nearest event on home screen, smart date labels (TODAY / TOMORROW / IN N DAYS)."
+description: "Use this to add or improve an events / афиша / события section in a Telegram Mini App / мини-апп. Triggered by: добавь афишу, сделай афишу событий, добавь события, events calendar. Handles event cards, nearest event on home screen, smart date labels."
 ---
 
 # Афиша событий для Telegram Mini App
