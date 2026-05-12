@@ -1,0 +1,17 @@
+{
+  "name": "telegram-welcome-miniapp",
+  "version": "1.0.0",
+  "description": "Telegram Mini App — Welcome Bot",
+  "main": "bot/index.js",
+  "scripts": {
+    "start": "node bot/index.js",
+    "dev": "node --watch bot/index.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.16.3",
+    "express": "^4.18.3",
+    "https-proxy-agent": "^7.0.4",
+    "node-cron": "^3.0.3",
+    "dotenv": "^16.4.5"
+  }
+}
