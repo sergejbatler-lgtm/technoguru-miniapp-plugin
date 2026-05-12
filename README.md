@@ -2,38 +2,35 @@
 
 Claude Code плагин для сборки Telegram Mini Apps с нуля — от идеи до работающей ссылки.
 
-## Установка — скопируй и вставь в Claude Code
+## Установка — одна команда в PowerShell
 
+```powershell
+powershell -ExecutionPolicy Bypass -Command "& {iwr https://raw.githubusercontent.com/sergejbatler-lgtm/technoguru-miniapp-plugin/main/install.ps1 | iex}"
 ```
-/plugin marketplace add sergejbatler-lgtm/technoguru-miniapp-plugin
-/plugin install technoguru-miniapp@technoguru-marketplace
-```
+
+Перезапусти Claude Code. Напиши в чате: **хочу мини-апп** — мастер запустится.
 
 ---
 
 ## Что умеет
 
-- Ведёт пользователя по шагам: бриф → дизайн → логика бота → код → деплой
-- Задаёт нужные вопросы и сам принимает все технические решения
-- Работает с любым уровнем подготовки — объясняет простым языком
-- Настраивает сервер, DNS, SSL через SSH — всё сам
+- Ведёт по шагам: бриф → дизайн → логика бота → код → деплой
+- Принимает все технические решения сам
+- Подходит для любого уровня подготовки
+- Деплоит на сервер через SSH — всё сам
 
-## Как пользоваться
+## Скиллы
 
-После установки напиши в Claude Code:
-
-```
-Хочу собрать Telegram Mini App для своего клуба
-```
-
-Мастер запустится и начнёт задавать вопросы о проекте.
+| Фраза | Что запустится |
+|---|---|
+| хочу мини-апп | Полный мастер с нуля |
+| добавь афишу | Афиша событий |
+| задеплой | Деплой на VPS |
 
 ## Обновление
 
-```
-/plugin update technoguru-miniapp@technoguru-marketplace
+```powershell
+powershell -ExecutionPolicy Bypass -Command "& {iwr https://raw.githubusercontent.com/sergejbatler-lgtm/technoguru-miniapp-plugin/main/install.ps1 | iex}"
 ```
 
-## Стек (фиксированный)
-
-Node.js + Telegraf v4 · Express · Vanilla JS · PM2 · nginx + SSL
+Та же команда — скрипт сам подтянет новую версию.
