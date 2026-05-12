@@ -15,7 +15,7 @@
         "url": "https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin.git"
       },
       "description": "Step-by-step wizard for building Telegram Mini Apps — from brief to deployment",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "strict": true
     }
   ]
