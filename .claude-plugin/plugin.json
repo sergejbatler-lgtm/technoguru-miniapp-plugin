@@ -1,0 +1,20 @@
+{
+  "name": "technoguru-miniapp",
+  "description": "Step-by-step wizard for building Telegram Mini Apps — from brief to deployment. Beginner-friendly, Claude makes all technical decisions.",
+  "version": "1.2.0",
+  "author": {
+    "name": "TechnoGuru",
+    "email": "sergejbatler-lgtm@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin",
+  "repository": "https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin",
+  "license": "MIT",
+  "keywords": [
+    "telegram",
+    "miniapp",
+    "bot",
+    "wizard",
+    "deploy",
+    "vps"
+  ]
+}

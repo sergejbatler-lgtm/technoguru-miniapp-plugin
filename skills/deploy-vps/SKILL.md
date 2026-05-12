@@ -1,4 +1,8 @@
-# Skill: deploy-vps
+---
+name: deploy-vps
+description: "Use this to deploy a Telegram Mini App project to a VPS server. Handles Ubuntu setup, Node.js, PM2, nginx, SSL, DNS configuration, and Russian server proxy setup."
+---
+
 # Деплой Telegram Mini App на VPS
 
 > Перед началом прочитай: `core/telegram-miniapp-fundamentals.md`
@@ -29,7 +33,7 @@
 
 ## ЭТАП 1 — Сбор данных
 
-Собирай в три независимых трека. Каждый — отдельный вопрос, жди ответа.
+Собирай в четыре независимых трека. Каждый — отдельный вопрос, жди ответа.
 
 ---
 
@@ -66,7 +70,6 @@
 
 ### Трек Б — Прокси (только если сервер в России)
 
-**Объясни пользователю:**
 ```
 ⚠️ Сервер в России — нужен HTTPS-прокси для Telegram API.
 
@@ -204,17 +207,13 @@ Proxy status: DNS only (серое облако, НЕ оранжевое — и�
 Save
 ```
 
-**Другой регистратор — универсальный порядок:**
+**Другой регистратор:**
 ```
 Нужно создать A-запись в DNS-панели домена.
 Скажи где куплен домен — найдём вместе.
 
-Или ищи в панели раздел: DNS / DNS-записи / Управление зоной / Name Servers.
-Создай запись:
-  Тип:    A
-  Имя:    @ (основной домен) или слово перед точкой (поддомен)
-  Адрес:  [IP сервера]
-  TTL:    3600 или Auto
+Ищи раздел: DNS / DNS-записи / Управление зоной.
+Тип: A, Имя: @ или поддомен, Адрес: IP сервера, TTL: 3600
 ```
 
 ---
@@ -228,66 +227,45 @@ bot.myproject.ru    → имя записи: bot
 
 **Проверить что DNS разошёлся:**
 ```bash
-ping your-domain.com
-# Должен вернуть IP твоего сервера
-
-# Онлайн-проверка: https://dnschecker.org
-# Вставь домен, тип A — смотри что везде твой IP
+ping your-domain.com   # должен вернуть IP сервера
+# Онлайн: https://dnschecker.org → тип A
 ```
 
-> ⚠️ DNS расходится обычно за 5–30 минут, иногда до 24 часов.
-> Пока не разошёлся — certbot выдаст ошибку. Просто подожди и повтори.
-> Cloudflare: убедись что proxy выключен (серое облако), иначе certbot не пройдёт.
+> ⚠️ DNS расходится обычно 5–30 минут, иногда до 24 часов.
+> Cloudflare: proxy должен быть выключен (серое облако), иначе certbot не пройдёт.
 
 ---
 
 ## ЭТАП 2 — Подключение и диагностика
 
-Подключись через SSH. Проверь состояние сервера:
-
 ```bash
-# Версия Ubuntu
-lsb_release -a
-
-# Node.js установлен?
-node -v
-
-# nginx установлен?
-nginx -v
-
-# PM2 установлен?
-pm2 -v
-
-# Свободное место
-df -h /
+lsb_release -a   # версия Ubuntu
+node -v          # Node.js установлен?
+nginx -v         # nginx установлен?
+pm2 -v           # PM2 установлен?
+df -h /          # свободное место
 ```
 
-Сообщи пользователю что нашёл. Что отсутствует — устанавливай на следующем этапе.
+Сообщи пользователю что нашёл. Чего нет — устанавливаем на следующем этапе.
 
 ---
 
 ## ЭТАП 3 — Подготовка сервера
 
-Устанавливай последовательно, жди завершения каждого шага:
-
 ```bash
-# 1. Обновление системы
 apt update && apt upgrade -y
 
-# 2. Node.js 20 (если нет или версия < 18)
+# Node.js 20 (если нет или < 18)
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs
 
-# 3. PM2
 npm install -g pm2
-
-# 4. nginx + certbot
 apt install -y nginx certbot python3-certbot-nginx
 ```
 
-После каждого шага — проверка:
+Проверка после установки:
 ```bash
-node -v    # должно быть v20.x.x
+node -v   # v20.x.x
 pm2 -v
 nginx -v
 ```
@@ -297,11 +275,8 @@ nginx -v
 ## ЭТАП 4 — Копирование файлов
 
 ```bash
-# Создать директорию на сервере
 mkdir -p /var/www/PROJECT_NAME
 ```
-
-Скопируй файлы через pscp (Windows) или scp (Mac/Linux):
 
 ```bash
 # Windows (pscp из PuTTY)
@@ -311,28 +286,19 @@ pscp -r "C:\путь\к\проекту\*" root@IP:/var/www/PROJECT_NAME/
 scp -r /путь/к/проекту/* root@IP:/var/www/PROJECT_NAME/
 ```
 
-**Что копировать:**
-- `bot/`
-- `miniapp/`
-- `*.json` (stats, events, participants, admin, last_welcome)
-- `package.json`
-
-**Что НЕ копировать:**
-- `node_modules/` (установим на сервере)
-- `.env` (создадим отдельно)
+Копировать: `bot/`, `miniapp/`, `*.json`, `package.json`
+НЕ копировать: `node_modules/`, `.env`
 
 ---
 
-## ЭТАП 5 — Настройка проекта на сервере
+## ЭТАП 5 — Настройка проекта
 
 ```bash
 cd /var/www/PROJECT_NAME
-
-# Установить зависимости
 npm install
 ```
 
-**Создать .env — без прокси (сервер не в России):**
+**Без прокси:**
 ```bash
 cat > .env << 'EOF'
 BOT_TOKEN=ТОКЕН_БОТА
@@ -342,7 +308,7 @@ GROUP_CHAT_ID=CHAT_ID_ГРУППЫ
 EOF
 ```
 
-**Создать .env — с прокси (сервер в России):**
+**С прокси (сервер в России):**
 ```bash
 cat > .env << 'EOF'
 BOT_TOKEN=ТОКЕН_БОТА
@@ -353,9 +319,6 @@ TELEGRAM_PROXY_URL=http://user:password@IP:PORT
 EOF
 ```
 
-> Формат прокси: `http://user:password@IP:PORT` или `http://IP:PORT` если без авторизации.
-> Прокси уже подключён в шаблоне бота через `https-proxy-agent` — дополнительный код не нужен.
-
 ---
 
 ## ЭТАП 6 — Настройка nginx
@@ -365,7 +328,6 @@ cat > /etc/nginx/sites-available/PROJECT_NAME << 'EOF'
 server {
     listen 80;
     server_name ДОМЕН;
-    
     location / {
         proxy_pass http://localhost:3001;
         proxy_http_version 1.1;
@@ -377,7 +339,6 @@ server {
 }
 EOF
 
-# Активировать конфиг
 ln -sf /etc/nginx/sites-available/PROJECT_NAME /etc/nginx/sites-enabled/
 nginx -t && systemctl reload nginx
 ```
@@ -387,19 +348,9 @@ nginx -t && systemctl reload nginx
 ## ЭТАП 7 — SSL сертификат
 
 ```bash
-certbot --nginx -d ДОМЕН
-```
-
-Certbot спросит email и попросит принять условия. Принять автоматически:
-```bash
 certbot --nginx -d ДОМЕН --non-interactive --agree-tos -m admin@ДОМЕН
+curl -I https://ДОМЕН   # должно вернуть HTTP/2 200
 ```
-
-Проверить:
-```bash
-curl -I https://ДОМЕН
-```
-Должно вернуть `HTTP/2 200`.
 
 ---
 
@@ -407,13 +358,8 @@ curl -I https://ДОМЕН
 
 ```bash
 cd /var/www/PROJECT_NAME
-
-# Запустить бота
 pm2 start bot/index.js --name PROJECT_NAME
-
-# Сохранить список процессов (автозапуск после перезагрузки)
-pm2 save
-pm2 startup
+pm2 save && pm2 startup
 ```
 
 Проверка:
@@ -422,27 +368,18 @@ pm2 status
 pm2 logs PROJECT_NAME --lines 20
 ```
 
-Лог должен содержать:
-- `✅ Webhook удалён`
-- `✅ Бот запущен`
+Лог должен содержать: `✅ Webhook удалён` и `✅ Бот запущен`
 
 ---
 
 ## ЭТАП 9 — Настройка кнопки меню в BotFather
 
-Напомни пользователю:
-
 ```
-Последний шаг — настрой кнопку в боте:
-
-1. Открой Telegram → @BotFather
-2. /setmenubutton
-3. Выбери бота
-4. Нажми Web App
-5. Введи URL: https://ДОМЕН
-6. Введи название: Меню
-
-Теперь в чате с ботом появится кнопка «Меню» → открывает мини-апп.
+1. Telegram → @BotFather → /setmenubutton
+2. Выбери бота
+3. Web App
+4. URL: https://ДОМЕН
+5. Название: Меню
 ```
 
 ---
@@ -455,27 +392,23 @@ pm2 logs PROJECT_NAME --lines 20
 🌐 Мини-апп: https://ДОМЕН
 🤖 Бот: @BOT_USERNAME
 
-📊 Управление (через SSH):
-   pm2 status                    — статус
-   pm2 logs PROJECT_NAME         — логи
-   pm2 restart PROJECT_NAME      — перезапуск
-   pm2 stop PROJECT_NAME         — остановить
+📊 Управление:
+   pm2 status / pm2 logs PROJECT_NAME / pm2 restart PROJECT_NAME
 
 🔄 Обновление кода:
-   1. Скопировать новые файлы через pscp/scp
-   2. pm2 restart PROJECT_NAME
+   Скопировать файлы → pm2 restart PROJECT_NAME
 
 ⚠️ Не забудь сменить пароль сервера!
 ```
 
 ---
 
-## Типичные ошибки деплоя
+## Типичные ошибки
 
 | Ошибка | Причина | Решение |
 |---|---|---|
 | nginx: 502 Bad Gateway | Бот не запущен или порт не тот | Проверить `pm2 status` и PORT в .env |
-| certbot: ошибка DNS | Домен не указывает на IP | Добавить A-запись в DNS, подождать 15 мин |
-| pm2 logs: MODULE_NOT_FOUND | npm install не запускался | `cd /var/www/PROJECT_NAME && npm install` |
-| Бот не отвечает | Старый webhook | `deleteWebhook()` уже в коде, просто перезапустить |
+| certbot: ошибка DNS | Домен не указывает на IP | Добавить A-запись, подождать 15 мин |
+| MODULE_NOT_FOUND | npm install не запускался | `cd /var/www/PROJECT_NAME && npm install` |
+| Бот не отвечает | Старый webhook | `deleteWebhook()` уже в коде, перезапустить |
 | SSL не обновляется | Certbot cron не работает | `certbot renew --dry-run` |

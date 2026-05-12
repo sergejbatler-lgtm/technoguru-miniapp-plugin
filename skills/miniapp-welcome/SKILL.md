@@ -1,4 +1,8 @@
-# Skill: miniapp-welcome
+---
+name: miniapp-welcome
+description: "Use this when user wants to build a Telegram Mini App from scratch. Runs a full guided wizard: brief → design approval → bot logic approval → code → deploy → handoff. Beginner-friendly, step-by-step."
+---
+
 # Telegram Mini App — сборка с нуля, пошаговый мастер
 
 > Перед началом прочитай: `core/telegram-miniapp-fundamentals.md`
@@ -409,13 +413,10 @@ DNS настраиваем на следующем этапе — после т�
 ✅ Готово:    Этап 1 — Бриф
               Этап 2 — Дизайн ✓
 ⏳ Осталось:  Этап 3 — Логика бота
-              Этап 4 — Доступы
-              Этап 5 — Код
-              Этап 6 — Деплой
-              Этап 7 — Сдача
+              ...
 ```
 
-**Правило возврата:** если сессия прерывалась, ушли в дебаг или в сторонний вопрос —
+**Правило возврата:** если сессия прерывалась или ушли в сторонний вопрос —
 при возврате первым делом покажи этот блок и продолжи с того этапа где остановились.
 
 Пользователь может написать **«где мы?»** — ответь блоком выше и жди продолжения.

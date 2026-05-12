@@ -1,0 +1,22 @@
+{
+  "name": "technoguru-marketplace",
+  "owner": {
+    "name": "TechnoGuru"
+  },
+  "metadata": {
+    "description": "Telegram Mini App tools by TechnoGuru",
+    "version": "1.2.0"
+  },
+  "plugins": [
+    {
+      "name": "technoguru-miniapp",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin.git"
+      },
+      "description": "Step-by-step wizard for building Telegram Mini Apps — from brief to deployment",
+      "version": "1.2.0",
+      "strict": true
+    }
+  ]
+}

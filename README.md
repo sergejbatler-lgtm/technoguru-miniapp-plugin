@@ -1,96 +1,113 @@
-# Telegram Mini Apps Plugin for Claude Code
+# TechnoGuru — Telegram Mini App Plugin
 
-Плагин для Claude Code, который ведёт разработчика от идеи до работающего Telegram Mini App.
-
----
-
-## Что внутри
-
-```
-telegram-miniapp-plugin/
-├── core/
-│   └── telegram-miniapp-fundamentals.md   # Технический фундамент — стек, архитектура, паттерны
-├── skills/
-│   ├── miniapp-welcome.md                 # Мастер: сборка Welcome Mini App с нуля
-│   ├── miniapp-events.md                  # Добавление афиши событий
-│   └── deploy-vps.md                      # Деплой на VPS (Ubuntu/Debian)
-├── templates/
-│   └── welcome-miniapp/                   # Готовый стартовый шаблон
-│       ├── bot/index.js
-│       ├── miniapp/index.html
-│       ├── stats.json
-│       ├── events.json
-│       ├── participants.json
-│       ├── admin.json
-│       ├── last_welcome.json
-│       └── package.json
-├── CHANGELOG.md
-└── README.md
-```
+Claude Code плагин для сборки Telegram Mini Apps с нуля — от идеи до работающей ссылки.
 
 ---
 
-## Скиллы
+## Что умеет
 
-| Скилл | Для чего |
-|---|---|
-| `miniapp-welcome` | Собрать Mini App для Telegram-группы/клуба с нуля. Бот приветствует новых участников, есть главный экран, кнопки навигации. |
-| `miniapp-events` | Добавить раздел «Афиша» с карточками событий, ближайшим событием на главном экране. |
-| `deploy-vps` | Задеплоить готовый проект на VPS-сервер (Ubuntu). Nginx + SSL + PM2. |
+- Ведёт пользователя по шагам: бриф → дизайн → логика бота → код → деплой
+- Задаёт нужные вопросы и сам принимает все технические решения
+- Работает с любым уровнем подготовки — объясняет простым языком
+- Настраивает сервер, DNS, SSL через SSH — всё сам
 
 ---
 
 ## Установка
 
-### 1. Клонировать репозиторий
+### Шаг 1 — Убедись что установлен Claude Code
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/telegram-miniapp-plugin.git
+claude --version
 ```
 
-### 2. Указать путь в Claude Code
+Если команда не найдена:
+```bash
+npm install -g @anthropic/claude-code
+```
 
-Добавь в настройки Claude Code (`.claude/settings.json` или `CLAUDE.md` проекта):
+### Шаг 2 — Клонируй плагин
+
+Выбери папку где будет лежать плагин (например, домашняя директория) и выполни:
+
+```bash
+git clone https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin.git
+```
+
+Запомни полный путь до папки — он нужен на следующем шаге.
+
+### Шаг 3 — Подключи плагин к Claude Code
+
+Открой файл настроек Claude Code:
+
+**Windows:** `C:\Users\ИМЯ\.claude\settings.json`
+**Mac/Linux:** `~/.claude/settings.json`
+
+Добавь в него блок (или создай файл если его нет):
 
 ```json
 {
-  "plugins": [
-    "/path/to/telegram-miniapp-plugin"
-  ]
+  "extraKnownMarketplaces": {
+    "technoguru-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "sergejbatler-lgtm/technoguru-miniapp-plugin"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "technoguru-miniapp@technoguru-marketplace": true
+  }
 }
 ```
 
-Или положи папку плагина рядом с проектом и укажи относительный путь.
+Если в файле уже есть другие настройки (например, superpowers) — добавь только новые ключи, не заменяй весь файл.
 
-### 3. Готово
+### Шаг 4 — Перезапусти Claude Code
 
-Напиши в чате: **"Хочу собрать Telegram Mini App для своего клуба"** — плагин запустит мастер.
+Закрой и открой Claude Code заново. Плагин загрузится автоматически.
+
+### Шаг 5 — Проверь
+
+Напиши в чате:
+```
+Хочу собрать Telegram Mini App для своего клуба
+```
+
+Claude запустит мастер и начнёт задавать вопросы о проекте.
+
+---
+
+## Скиллы
+
+| Скилл | Триггер | Что делает |
+|---|---|---|
+| `miniapp-welcome` | «Хочу собрать Mini App» | Полный мастер с нуля до деплоя |
+| `miniapp-events` | «Добавь афишу событий» | Афиша с карточками и умными датами |
+| `deploy-vps` | «Задеплой проект на сервер» | Ubuntu + PM2 + nginx + SSL |
 
 ---
 
 ## Обновление
 
+Когда выйдет новая версия — зайди в папку плагина и выполни:
+
 ```bash
-cd telegram-miniapp-plugin
+cd technoguru-miniapp-plugin
 git pull
 ```
 
----
-
-## Стек (всегда этот, не требует выбора)
-
-- **Бот:** Node.js + Telegraf v4
-- **Сервер:** Express.js
-- **Фронтенд:** Vanilla JS + HTML/CSS (один файл)
-- **Процесс:** PM2
-- **Прокси:** nginx + SSL (Let's Encrypt)
-- **Данные:** JSON-файлы
+Перезапусти Claude Code — новая версия подхватится автоматически.
 
 ---
 
-## Принципы плагина
+## Стек (фиксированный, без выбора)
 
-- Claude принимает все технические решения сам — пользователю не задаются вопросы о стеке
-- Код пишется только после двух явных утверждений: дизайн + логика бота
-- Язык объяснений — простой, без жаргона, подходит для новичков
-- Деплой делает Claude через SSH, если есть доступ
+| Слой | Технология |
+|---|---|
+| Бот | Node.js + Telegraf v4 |
+| Сервер | Express.js |
+| Фронтенд | Vanilla JS + HTML/CSS |
+| Процесс | PM2 |
+| Прокси | nginx + SSL (Let's Encrypt) |
+| Данные | JSON-файлы |

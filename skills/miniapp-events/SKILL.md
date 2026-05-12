@@ -1,4 +1,8 @@
-# Skill: miniapp-events
+---
+name: miniapp-events
+description: "Use this to add or improve an events calendar section in an existing Telegram Mini App. Handles event cards, nearest event on home screen, smart date labels (TODAY / TOMORROW / IN N DAYS)."
+---
+
 # Афиша событий для Telegram Mini App
 
 > Перед началом прочитай: `core/telegram-miniapp-fundamentals.md`
@@ -199,78 +203,18 @@ function renderEvents(events) {
   padding: 16px;
   margin-bottom: 12px;
 }
-
 .event-when {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 6px;
 }
-
-.event-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-
-.event-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-.event-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.event-format {
-  font-size: 12px;
-  color: var(--text-secondary);
-  background: var(--tag-bg);
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-.badge-closed {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.next-event-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  cursor: pointer;
-}
-
-.next-event-when {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.next-event-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.next-event-format {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
+.event-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+.event-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; }
+.event-footer { display: flex; align-items: center; justify-content: space-between; }
+.event-format { font-size: 12px; color: var(--text-secondary); background: var(--tag-bg); padding: 3px 10px; border-radius: 20px; }
+.next-event-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 16px; cursor: pointer; }
+.next-event-when { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+.next-event-title { font-size: 16px; font-weight: 600; }
+.next-event-format { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
 ```
 
 ---
