@@ -15,59 +15,23 @@ Claude Code плагин для сборки Telegram Mini Apps с нуля — 
 
 ## Установка
 
-### Шаг 1 — Убедись что установлен Claude Code
+Две команды прямо в Claude Code — больше ничего не нужно.
 
-```bash
-claude --version
+### Шаг 1 — Добавь маркетплейс
+
+Открой Claude Code и напиши:
+
+```
+/plugin marketplace add sergejbatler-lgtm/technoguru-miniapp-plugin
 ```
 
-Если команда не найдена:
-```bash
-npm install -g @anthropic/claude-code
+### Шаг 2 — Установи плагин
+
+```
+/plugin install technoguru-miniapp@technoguru-marketplace
 ```
 
-### Шаг 2 — Клонируй плагин
-
-Выбери папку где будет лежать плагин (например, домашняя директория) и выполни:
-
-```bash
-git clone https://github.com/sergejbatler-lgtm/technoguru-miniapp-plugin.git
-```
-
-Запомни полный путь до папки — он нужен на следующем шаге.
-
-### Шаг 3 — Подключи плагин к Claude Code
-
-Открой файл настроек Claude Code:
-
-**Windows:** `C:\Users\ИМЯ\.claude\settings.json`
-**Mac/Linux:** `~/.claude/settings.json`
-
-Добавь в него блок (или создай файл если его нет):
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "technoguru-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "sergejbatler-lgtm/technoguru-miniapp-plugin"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "technoguru-miniapp@technoguru-marketplace": true
-  }
-}
-```
-
-Если в файле уже есть другие настройки (например, superpowers) — добавь только новые ключи, не заменяй весь файл.
-
-### Шаг 4 — Перезапусти Claude Code
-
-Закрой и открой Claude Code заново. Плагин загрузится автоматически.
-
-### Шаг 5 — Проверь
+### Шаг 3 — Проверь
 
 Напиши в чате:
 ```
