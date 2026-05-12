@@ -2,6 +2,13 @@
 
 Claude Code плагин для сборки Telegram Mini Apps с нуля — от идеи до работающей ссылки.
 
+## Установка — скопируй и вставь в Claude Code
+
+```
+/plugin marketplace add sergejbatler-lgtm/technoguru-miniapp-plugin
+/plugin install technoguru-miniapp@technoguru-marketplace
+```
+
 ---
 
 ## Что умеет
@@ -11,51 +18,22 @@ Claude Code плагин для сборки Telegram Mini Apps с нуля — 
 - Работает с любым уровнем подготовки — объясняет простым языком
 - Настраивает сервер, DNS, SSL через SSH — всё сам
 
----
+## Как пользоваться
 
-## Установка
-
-Скопируй эти две строки и вставь в Claude Code:
+После установки напиши в Claude Code:
 
 ```
-/plugin marketplace add sergejbatler-lgtm/technoguru-miniapp-plugin
-/plugin install technoguru-miniapp@technoguru-marketplace
+Хочу собрать Telegram Mini App для своего клуба
 ```
 
-Всё. Плагин готов к работе.
-
----
-
-## Скиллы
-
-| Скилл | Триггер | Что делает |
-|---|---|---|
-| `miniapp-welcome` | «Хочу собрать Mini App» | Полный мастер с нуля до деплоя |
-| `miniapp-events` | «Добавь афишу событий» | Афиша с карточками и умными датами |
-| `deploy-vps` | «Задеплой проект на сервер» | Ubuntu + PM2 + nginx + SSL |
-
----
+Мастер запустится и начнёт задавать вопросы о проекте.
 
 ## Обновление
 
-Когда выйдет новая версия — зайди в папку плагина и выполни:
-
-```bash
-cd technoguru-miniapp-plugin
-git pull
+```
+/plugin update technoguru-miniapp@technoguru-marketplace
 ```
 
-Перезапусти Claude Code — новая версия подхватится автоматически.
+## Стек (фиксированный)
 
----
-
-## Стек (фиксированный, без выбора)
-
-| Слой | Технология |
-|---|---|
-| Бот | Node.js + Telegraf v4 |
-| Сервер | Express.js |
-| Фронтенд | Vanilla JS + HTML/CSS |
-| Процесс | PM2 |
-| Прокси | nginx + SSL (Let's Encrypt) |
-| Данные | JSON-файлы |
+Node.js + Telegraf v4 · Express · Vanilla JS · PM2 · nginx + SSL
