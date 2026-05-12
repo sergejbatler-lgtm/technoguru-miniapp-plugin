@@ -15,30 +15,14 @@ Claude Code плагин для сборки Telegram Mini Apps с нуля — 
 
 ## Установка
 
-Две команды прямо в Claude Code — больше ничего не нужно.
-
-### Шаг 1 — Добавь маркетплейс
-
-Открой Claude Code и напиши:
+Скопируй эти две строки и вставь в Claude Code:
 
 ```
 /plugin marketplace add sergejbatler-lgtm/technoguru-miniapp-plugin
-```
-
-### Шаг 2 — Установи плагин
-
-```
 /plugin install technoguru-miniapp@technoguru-marketplace
 ```
 
-### Шаг 3 — Проверь
-
-Напиши в чате:
-```
-Хочу собрать Telegram Mini App для своего клуба
-```
-
-Claude запустит мастер и начнёт задавать вопросы о проекте.
+Всё. Плагин готов к работе.
 
 ---
 
